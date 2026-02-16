@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chúc Mừng Năm Mới</title>
+<title>Happy New Year Brooo</title>
 
 <style>
 *{
@@ -13,8 +13,9 @@
 body {
     margin: 0;
     overflow: hidden;
-    background: #000000;
+    background: #000;
     font-family: Arial, sans-serif;
+    color: white;
 }
 
 /* ===== TITLE ===== */
@@ -23,9 +24,9 @@ h1 {
     width: 100%;
     text-align: center;
     top: 15px;
-    color: gold;
-    font-size: clamp(24px, 6vw, 50px);
-    text-shadow: 0 0 20px orange, 0 0 40px red;
+    font-size: clamp(24px, 6vw, 48px);
+    color: cyan;
+    text-shadow: 0 0 10px cyan, 0 0 20px blue;
     z-index: 10;
     padding: 0 10px;
 }
@@ -36,18 +37,17 @@ h1 {
     width: 100%;
     text-align: center;
     bottom: 25px;
-    color: white;
-    font-size: clamp(14px, 4vw, 20px);
-    opacity: 0.8;
+    font-size: clamp(14px, 4vw, 18px);
+    opacity: 0.7;
     animation: blink 1.5s infinite;
     z-index: 10;
     padding: 0 10px;
 }
 
 @keyframes blink {
-    0% { opacity: 0.3; }
-    50% { opacity: 1; }
-    100% { opacity: 0.3; }
+    0% {opacity: 0.3;}
+    50% {opacity: 1;}
+    100% {opacity: 0.3;}
 }
 
 canvas {
@@ -63,16 +63,14 @@ canvas {
     background: rgba(0,0,0,0.95);
     padding: 25px;
     border-radius: 20px;
-    color: white;
-    font-size: clamp(15px, 4vw, 20px);
     text-align: center;
-    box-shadow: 0 0 40px gold;
+    box-shadow: 0 0 30px cyan;
     transition: 0.4s;
-    z-index: 20;
-    white-space: pre-line;
     width: 90%;
-    max-width: 650px;
+    max-width: 600px;
     line-height: 1.6;
+    white-space: pre-line;
+    font-size: clamp(15px, 4vw, 18px);
 }
 
 .message-box.show {
@@ -84,16 +82,17 @@ button {
     padding: 12px 25px;
     border: none;
     border-radius: 12px;
-    background: gold;
+    background: cyan;
     font-size: 16px;
     cursor: pointer;
 }
 </style>
 </head>
+
 <body>
 
-<h1>🎆 Chúc Mừng Năm Mới🎆</h1>
-<div class="hint" id="hintText">👉 Nhấn vào pháo hoa để nhận lời chúc 🎉</div>
+<h1>🎉 Happy New Year Bro 🎉</h1>
+<div class="hint" id="hint">👉 Bấm vào pháo hoa đi Bro 🔥</div>
 
 <canvas id="canvas"></canvas>
 
@@ -113,17 +112,21 @@ function resizeCanvas(){
 resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
-const longWish = `
-Chúc mừng năm mới gia đình của con ❤️
+const friendWish = `
+Chúc bro năm mới giàu bất ngờ 💸
 
-Con chúc ông bà luôn mạnh khỏe, sống vui sống lâu bên con cháu.
-Chúc ba mẹ một năm mới bình an, hạnh phúc và luôn thành công
-trong công việc cũng như cuộc sống.
+Học ít hiểu nhiều, ngủ ít vẫn khỏe,
+deadline tự cook,
+tiền tự chui vào túi.
 
-Chúc cả gia đình mình lúc nào cũng tràn ngập tiếng cười,
-luôn yêu thương và bên nhau dù bất cứ điều gì xảy ra.
+Crush tự đổ,
+game auto thắng,
+thi cử auto điểm cao.
 
-Năm mới an khang – thịnh vượng – vạn sự như ý 🎉
+Chơi hết mình – sống hết cỡ –
+và vẫn luôn bên nhau như bây giờ nha 😎🔥
+
+2026 vui vẻ!!!
 `;
 
 let fireworks = [];
@@ -131,25 +134,25 @@ let particles = [];
 
 class Firework {
     constructor() {
-        this.x = Math.random() * canvas.width;
+        this.x = Math.random()*canvas.width;
         this.y = canvas.height;
-        this.targetY = Math.random() * canvas.height / 2;
+        this.targetY = Math.random()*canvas.height/2;
         this.speed = 5;
         this.color = `hsl(${Math.random()*360},100%,60%)`;
     }
 
-    update() {
+    update(){
         this.y -= this.speed;
-        if (this.y <= this.targetY) {
-            explode(this.x, this.y, this.color);
+        if(this.y <= this.targetY){
+            explode(this.x,this.y,this.color);
             return false;
         }
         return true;
     }
 
-    draw() {
+    draw(){
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 3, 0, Math.PI*2);
+        ctx.arc(this.x,this.y,3,0,Math.PI*2);
         ctx.fillStyle = this.color;
         ctx.shadowBlur = 10;
         ctx.shadowColor = this.color;
@@ -159,64 +162,59 @@ class Firework {
 }
 
 class Particle {
-    constructor(x, y, color) {
-        this.x = x;
-        this.y = y;
-        this.speed = Math.random()*4+1;
-        this.angle = Math.random()*Math.PI*2;
-        this.life = 100;
-        this.color = color;
+    constructor(x,y,color){
+        this.x=x;
+        this.y=y;
+        this.speed=Math.random()*4+1;
+        this.angle=Math.random()*Math.PI*2;
+        this.life=100;
+        this.color=color;
     }
 
-    update() {
-        this.x += Math.cos(this.angle)*this.speed;
-        this.y += Math.sin(this.angle)*this.speed;
-        this.speed *= 0.97;
+    update(){
+        this.x+=Math.cos(this.angle)*this.speed;
+        this.y+=Math.sin(this.angle)*this.speed;
+        this.speed*=0.97;
         this.life--;
-        return this.life > 0;
+        return this.life>0;
     }
 
-    draw() {
-        ctx.globalAlpha = this.life / 100;
+    draw(){
+        ctx.globalAlpha=this.life/100;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 2, 0, Math.PI*2);
-        ctx.fillStyle = this.color;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = this.color;
+        ctx.arc(this.x,this.y,2,0,Math.PI*2);
+        ctx.fillStyle=this.color;
         ctx.fill();
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1;
+        ctx.globalAlpha=1;
     }
 }
 
-function explode(x, y, color) {
-    for (let i=0; i<70; i++) {
+function explode(x,y,color){
+    for(let i=0;i<70;i++){
         particles.push(new Particle(x,y,color));
     }
 }
 
-function animate() {
-    ctx.fillStyle = "rgba(0,0,0,0.25)";
+function animate(){
+    ctx.fillStyle="rgba(0,0,0,0.25)";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    fireworks = fireworks.filter(f => f.update());
-    fireworks.forEach(f => f.draw());
+    fireworks=fireworks.filter(f=>f.update());
+    fireworks.forEach(f=>f.draw());
 
-    particles = particles.filter(p => p.update());
-    particles.forEach(p => p.draw());
+    particles=particles.filter(p=>p.update());
+    particles.forEach(p=>p.draw());
 
     requestAnimationFrame(animate);
 }
 
-setInterval(() => {
-    fireworks.push(new Firework());
-}, 700);
+setInterval(()=>{fireworks.push(new Firework());},700);
 
-/* Hỗ trợ cả click + chạm */
+/* PC + Mobile */
 function showMessage(){
-    document.getElementById("msgText").innerText = longWish;
+    document.getElementById("msgText").innerText=friendWish;
     document.getElementById("msgBox").classList.add("show");
-    document.getElementById("hintText").style.display = "none";
+    document.getElementById("hint").style.display="none";
 }
 
 canvas.addEventListener("click", showMessage);
