@@ -6,6 +6,10 @@
 <title>Chúc Mừng Năm Mới</title>
 
 <style>
+*{
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     overflow: hidden;
@@ -13,27 +17,31 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/* ===== TITLE ===== */
 h1 {
     position: absolute;
     width: 100%;
     text-align: center;
-    top: 20px;
+    top: 15px;
     color: gold;
-    font-size: 50px;
+    font-size: clamp(24px, 6vw, 50px);
     text-shadow: 0 0 20px orange, 0 0 40px red;
     z-index: 10;
+    padding: 0 10px;
 }
 
+/* ===== HINT ===== */
 .hint {
     position: absolute;
     width: 100%;
     text-align: center;
-    bottom: 40px;
+    bottom: 25px;
     color: white;
-    font-size: 20px;
+    font-size: clamp(14px, 4vw, 20px);
     opacity: 0.8;
     animation: blink 1.5s infinite;
     z-index: 10;
+    padding: 0 10px;
 }
 
 @keyframes blink {
@@ -46,21 +54,23 @@ canvas {
     display: block;
 }
 
+/* ===== MESSAGE BOX ===== */
 .message-box {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     background: rgba(0,0,0,0.95);
-    padding: 30px 50px;
+    padding: 25px;
     border-radius: 20px;
     color: white;
-    font-size: 20px;
+    font-size: clamp(15px, 4vw, 20px);
     text-align: center;
     box-shadow: 0 0 40px gold;
     transition: 0.4s;
     z-index: 20;
     white-space: pre-line;
+    width: 90%;
     max-width: 650px;
     line-height: 1.6;
 }
@@ -71,10 +81,11 @@ canvas {
 
 button {
     margin-top: 20px;
-    padding: 8px 20px;
+    padding: 12px 25px;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     background: gold;
+    font-size: 16px;
     cursor: pointer;
 }
 </style>
@@ -95,8 +106,12 @@ button {
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
 
 const longWish = `
 Chúc mừng năm mới gia đình của con ❤️
@@ -197,11 +212,15 @@ setInterval(() => {
     fireworks.push(new Firework());
 }, 700);
 
-canvas.addEventListener("click", () => {
+/* Hỗ trợ cả click + chạm */
+function showMessage(){
     document.getElementById("msgText").innerText = longWish;
     document.getElementById("msgBox").classList.add("show");
     document.getElementById("hintText").style.display = "none";
-});
+}
+
+canvas.addEventListener("click", showMessage);
+canvas.addEventListener("touchstart", showMessage);
 
 function closeMsg(){
     document.getElementById("msgBox").classList.remove("show");
